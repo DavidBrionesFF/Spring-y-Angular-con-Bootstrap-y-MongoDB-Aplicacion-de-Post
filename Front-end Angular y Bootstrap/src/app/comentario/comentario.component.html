@@ -1,0 +1,57 @@
+<div class="jumbotron">
+  <h1 class="display-4">{{post.nombre}}</h1>
+  <p class="lead">{{post.texto}}</p>
+  <hr class="my-4">
+
+  <p>{{post.descripcion}}</p>
+
+  <h5>Comentarios: </h5>
+
+  <ul>
+    <li *ngFor="let c of post.comentarios">
+      <p>{{c.comentario}}</p>
+      <p><small><strong>Publicado por: {{c.nombre}}</strong></small></p>
+      <p><small>{{c.fecha | date}}</small></p>
+    </li>
+  </ul>
+
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong">
+    Agregar comentario
+  </button>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Agregar comentario</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+
+          <div class="form-group">
+            <label for="nombre">Nombre</label>
+            <input [(ngModel)]="nombre" name="nombre" type="text" class="form-control" id="nombre" placeholder="Nombre">
+            <small id="nombre" class="form-text text-muted">Coloque con su nombre.</small>
+          </div>
+
+          <div class="form-group">
+            <label for="post">Comentario</label>
+            <input [(ngModel)]="comentario" name="comentario" type="text" class="form-control" id="Comentario" placeholder="Post">
+            <small id="post" class="form-text text-muted">Coloque su comentario</small>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        <button (click)="enviar()" type="button" class="btn btn-primary" data-dismiss="modal">Agregar</button>
+      </div>
+    </div>
+  </div>
+</div>

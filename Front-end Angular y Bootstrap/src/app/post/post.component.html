@@ -1,0 +1,9 @@
+<div class="jumbotron">
+  <h1 class="display-4">{{post.nombre}}</h1>
+  <p class="lead">{{post.texto}}</p>
+  <hr class="my-4">
+  <h5>{{post.fecha | date}}</h5>
+  <button type="button" class="btn btn-primary" [routerLink]="['/post/', post.id]" routerLinkActive="router-link-active">
+    Ver post
+  </button>
+</div>
