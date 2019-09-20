@@ -1,6 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PostService } from '../post.service';
+import {Comentario} from '../model/comentario.model';
+import {Post} from '../model/post.model';
 
 @Component({
   selector: 'app-comentario',
@@ -8,10 +10,10 @@ import { PostService } from '../post.service';
   styleUrls: ['./comentario.component.css']
 })
 export class ComentarioComponent implements OnInit {
-  private idPost;
-  public post;
-  public nombre;
-  public comentario;
+  private idPost: string;
+  public post: Post;
+  public nombre: string;
+  public comentario: string;
 
   constructor(
     private route: ActivatedRoute,
@@ -21,7 +23,7 @@ export class ComentarioComponent implements OnInit {
 
   ngOnInit() {
     this.idPost = this.route.snapshot.paramMap.get('id');
-    this.service.find(this.idPost).subscribe(
+    this.service.findById(this.idPost).subscribe(
       response => {
         this.post = response;
       },
@@ -37,7 +39,7 @@ export class ComentarioComponent implements OnInit {
       'nombre': this.nombre
     };
 
-    this.service.addComment(this.post.id, data)
+    this.service.addComment(this.post.id, new Comentario().deserialize(data))
         .subscribe(response => {
           this.ngOnInit();
         });

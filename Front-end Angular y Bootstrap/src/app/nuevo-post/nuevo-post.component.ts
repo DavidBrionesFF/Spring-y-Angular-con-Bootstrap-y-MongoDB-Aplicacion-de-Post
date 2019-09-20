@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PostService } from '../post.service';
 import { Router } from '@angular/router';
+import {Post} from '../model/post.model';
 
 @Component({
   selector: 'app-nuevo-post',
@@ -28,7 +29,7 @@ export class NuevoPostComponent implements OnInit {
       'descripcion': this.descripcion
     };
 
-    this.postService.save(post)
+    this.postService.save(new Post().deserialize(post))
         .subscribe(response => {
           console.log(response);
           this.router.navigate(['/']);
