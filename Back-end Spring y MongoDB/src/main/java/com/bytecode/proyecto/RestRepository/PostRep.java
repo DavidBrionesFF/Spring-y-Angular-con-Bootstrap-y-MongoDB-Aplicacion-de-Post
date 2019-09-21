@@ -2,6 +2,7 @@ package com.bytecode.proyecto.RestRepository;
 
 import com.bytecode.proyecto.Document.Comentario;
 import com.bytecode.proyecto.Document.Post;
+import com.mongodb.MongoClient;
 import com.mongodb.client.result.UpdateResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -11,13 +12,19 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Repository;
 
+import javax.annotation.PostConstruct;
 import java.util.List;
 
 @Repository
 public class PostRep {
 
-    @Autowired
+    //@Autowired
     private MongoTemplate mongoTemplate;
+
+    @PostConstruct
+    public void post(){
+        mongoTemplate = new MongoTemplate(new MongoClient("localhost"), "angular");
+    }
 
     public Post save(Post post){
         return mongoTemplate.save(post);
